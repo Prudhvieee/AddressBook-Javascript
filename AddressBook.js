@@ -122,6 +122,11 @@ function DeleteContact(firstName, mobileNumber)
         }
     }
 }
+// UC6 Gets Count of Contact in Address Book.
+function CountContact(){
+    let addressBookCount = AddressBook.reduce((count) => count= count + 1, 0);
+    console.log("Contact Count is: " + addressBookCount);
+}
 function Main() {
   console.log("Welcome to address book");
   AddContact(
@@ -164,3 +169,4 @@ function Main() {
   AddressBook.forEach(contact=>console.log(contact.toString()));
 }
 Main();
+CountContact();
