@@ -1,4 +1,3 @@
-//UC-1
 class Contact {
   // Constructor for the different fields of contact
   constructor(...params) {
@@ -11,7 +10,7 @@ class Contact {
     this.phoneNumber = params[6];
     this.email = params[7];
   }
-  // Getter & Setter methods
+  // Getter & Setter method
   get firstName() {
     return this._firstName;
   }
@@ -26,15 +25,15 @@ class Contact {
   set lastName(lastName) {
     let lastNameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
     if (lastNameRegex.test(lastName)) this._lastName = lastName;
-    else throw "Invalid Last name";
+    else throw "Invalid last Name";
   }
   get address() {
     return this._address;
   }
   set address(address) {
-    let addressRegex = RegExp("^d+s[A-z]+s[A-z]+$");
+    let addressRegex = RegExp("^[A-Za-z]{4,}$");
     if (addressRegex.test(address)) this._address = address;
-    else throw "Invalid address";
+    else throw "Invalid Address";
   }
   get city() {
     return this._city;
@@ -73,9 +72,9 @@ class Contact {
   }
   set email(email) {
     let emailRegex = RegExp(
-      "^[a-zA-Z0-9_+&*#$^!-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"
+      "^[a-z]{1}[a-z0-9]{2,}([._+-]?[a-z0-9]+)?[@]{1}[a-z1-9]+[.]{1}(co|net|com|gov)([.]{1}[a-z]{2,3})?$"
     );
-    if (emailRegex.test(this.email)) this._email = email;
+    if (emailRegex.test(email)) this._email = email;
     else throw "Invalid Email";
   }
   //To string method for displaying contacts
@@ -100,3 +99,61 @@ class Contact {
     );
   }
 }
+let AddressBook = new Array();
+function AddContact(
+  firstName,
+  lastName,
+  address,
+  city,
+  state,
+  zip,
+  phoneNumber,
+  email
+) {
+  let newcontact = new Contact(
+    firstName,
+    lastName,
+    address,
+    city,
+    state,
+    zip,
+    phoneNumber,
+    email
+  );
+  AddressBook.push(newcontact);
+}
+function Main() {
+  console.log("Welcome to address book");
+  AddContact(
+    "Prudhvi",
+    "Reddy",
+    "Tirupati",
+    "Chittoor",
+    "AndhraPradesh",
+    "517 502",
+    "91 7654321034",
+    "prudhvi@gmail.com"
+  );
+  AddContact(
+    "Joe",
+    "Biden",
+    "RedFort",
+    "Delhi",
+    "Delhi",
+    "432 765",
+    "91 7654321098",
+    "bieden@gmail.com"
+  );
+  AddContact(
+    "Sukhla",
+    "Singh",
+    "GhatRoad",
+    "Kolkatta",
+    "Kolkatta",
+    "517 644",
+    "91 8976532214",
+    "sukhla@gmail.com"
+  );
+}
+Main();
+AddressBook.forEach((contact) => console.log(contact.toString()));
