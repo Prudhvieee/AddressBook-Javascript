@@ -111,6 +111,17 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
         console.error(e);
     }
 }
+// UC5 Delete Contact
+function DeleteContact(firstName, mobileNumber)
+{
+    for(let index = 0; index < AddressBook.length; index++)
+    {
+        if(AddressBook[index].firstName == firstName && AddressBook[index].phoneNumber == mobileNumber)
+        {
+            AddressBook.splice(index, 1 );
+        }
+    }
+}
 function Main() {
   console.log("Welcome to address book");
   AddContact(
@@ -147,6 +158,9 @@ function Main() {
   AddressBook.forEach((contact) => console.log(contact.toString()));
   // UC4 Edit Contact by name.
   AddressBook.filter(contact => contact.firstName == "Prudhvi" && contact.phoneNumber == "91 7654321034").forEach(contact =>{ contact.address = "RajajiNagar"; contact.city = "Banagalore"; contact.state = "Karnataka"})
+  AddressBook.forEach(contact=>console.log(contact.toString()));
+  // UC5 Deletes the contact from AddressBook Array.
+  DeleteContact("Prudhvi", "91 7654321034");
   AddressBook.forEach(contact=>console.log(contact.toString()));
 }
 Main();
