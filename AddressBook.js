@@ -133,6 +133,15 @@ function CountContact(){
     let addressBookCount = AddressBook.reduce((count) => count= count + 1, 0);
     console.log("Contact Count is: " + addressBookCount);
 }
+// UC8 Search by city and state
+function SearchByCity(city) {
+    let sortByCity = AddressBook.filter(contact => contact.city == city);
+    return sortByCity;
+}
+function SearchByState(state) {
+    let sortByState = AddressBook.filter(contact => contact.state == state);
+    return sortByState;
+}
 function Main() {
   console.log("Welcome to address book");
   AddContact(
@@ -173,6 +182,10 @@ function Main() {
   // UC5 Deletes the contact from AddressBook Array.
   DeleteContact("Prudhvi", "91 7654321034");
   AddressBook.forEach(contact=>console.log(contact.toString()));
+  // UC8 Prints Contact by city.
+  console.log(SearchByCity("Chittoor"));
+  // UC8 Prints Contact by state.
+  console.log(SearchByState("Delhi"));
 }
 Main();
 CountContact();
