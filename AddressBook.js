@@ -162,6 +162,11 @@ function ContactCountByState(){
     AddressBook.filter((contact) => countStateMap.set(contact.state, SearchByState(contact.state).length));
     return countStateMap;
 }
+// UC11 Sort Contacts by name.
+function SortContactsByName(){
+  AddressBook.sort((person1, person2) => (person1.firstName).localeCompare(person2.firstName));
+  console.log(AddressBook);
+}
 function Main() {
   console.log("Welcome to address book");
   AddContact(
@@ -225,3 +230,4 @@ let countCityMap = new Map();
 let countStateMap = new Map();
 Main();
 CountContact();
+SortContactsByName();
