@@ -99,28 +99,17 @@ class Contact {
     );
   }
 }
+// Created Address Book Array to store contacts.
 let AddressBook = new Array();
-function AddContact(
-  firstName,
-  lastName,
-  address,
-  city,
-  state,
-  zip,
-  phoneNumber,
-  email
-) {
-  let newcontact = new Contact(
-    firstName,
-    lastName,
-    address,
-    city,
-    state,
-    zip,
-    phoneNumber,
-    email
-  );
-  AddressBook.push(newcontact);
+//UC3 Add new contact.
+function AddContact(firstName, lastName, address, city, state, zip, phoneNumber, email) {
+    try {
+        let newcontact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        AddressBook.push(newcontact);
+    }
+    catch (e) {
+        console.error(e);
+    }
 }
 function Main() {
   console.log("Welcome to address book");
@@ -154,6 +143,10 @@ function Main() {
     "91 8976532214",
     "sukhla@gmail.com"
   );
+  //printing array
+  AddressBook.forEach((contact) => console.log(contact.toString()));
+  // UC4 Edit Contact by name.
+  AddressBook.filter(contact => contact.firstName == "Prudhvi" && contact.phoneNumber == "91 7654321034").forEach(contact =>{ contact.address = "RajajiNagar"; contact.city = "Banagalore"; contact.state = "Karnataka"})
+  AddressBook.forEach(contact=>console.log(contact.toString()));
 }
 Main();
-AddressBook.forEach((contact) => console.log(contact.toString()));
