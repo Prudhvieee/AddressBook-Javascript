@@ -102,70 +102,128 @@ class Contact {
 // Created Address Book Array to store contacts.
 let AddressBook = new Array();
 //UC3 Add new contact.
-function AddContact(firstName, lastName, address, city, state, zip, phoneNumber, email) {
-    try {
-        let newcontact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        // UC7 Checks for Duplicate contacts.
-        if (AddressBook.find(person => person.firstName == newcontact.firstName && person.email == newcontact.email)) {
-            throw "Contact Already Exists.";
-        } else {
-            AddressBook.push(newcontact);
-            console.log("Contact Added Successfully.");
-        }
+function AddContact(
+  firstName,
+  lastName,
+  address,
+  city,
+  state,
+  zip,
+  phoneNumber,
+  email
+) {
+  try {
+    let newcontact = new Contact(
+      firstName,
+      lastName,
+      address,
+      city,
+      state,
+      zip,
+      phoneNumber,
+      email
+    );
+    // UC7 Checks for Duplicate contacts.
+    if (
+      AddressBook.find(
+        (person) =>
+          person.firstName == newcontact.firstName &&
+          person.email == newcontact.email
+      )
+    ) {
+      throw "Contact Already Exists.";
+    } else {
+      AddressBook.push(newcontact);
+      console.log("Contact Added Successfully.");
     }
-    catch (e) {
-        console.error(e);
-    }
+  } catch (e) {
+    console.error(e);
+  }
 }
 // UC5 Delete Contact
-function DeleteContact(firstName, mobileNumber)
-{
-    for(let index = 0; index < AddressBook.length; index++)
-    {
-        if(AddressBook[index].firstName == firstName && AddressBook[index].phoneNumber == mobileNumber)
-        {
-            AddressBook.splice(index, 1 );
-        }
+function DeleteContact(firstName, mobileNumber) {
+  for (let index = 0; index < AddressBook.length; index++) {
+    if (
+      AddressBook[index].firstName == firstName &&
+      AddressBook[index].phoneNumber == mobileNumber
+    ) {
+      AddressBook.splice(index, 1);
     }
+  }
 }
 // UC6 Gets Count of Contact in Address Book.
-function CountContact(){
-    let addressBookCount = AddressBook.reduce((count) => count= count + 1, 0);
-    console.log("Contact Count is: " + addressBookCount);
+function CountContact() {
+  let addressBookCount = AddressBook.reduce((count) => (count = count + 1), 0);
+  console.log("Contact Count is: " + addressBookCount);
 }
 // UC8 Search by city and state
 function SearchByCity(city) {
-    let sortByCity = AddressBook.filter(contact => contact.city == city);
-    return sortByCity;
+  let sortByCity = AddressBook.filter((contact) => contact.city == city);
+  return sortByCity;
 }
 function SearchByState(state) {
-    let sortByState = AddressBook.filter(contact => contact.state == state);
-    return sortByState;
+  let sortByState = AddressBook.filter((contact) => contact.state == state);
+  return sortByState;
 }
 // UC9 Displays Contact By City.
-function ViewContactByCity(){
-    AddressBook.filter((contact) => contactsCityMap.set(contact.city, SearchByCity(contact.city)));
-    return contactsCityMap;
+function ViewContactByCity() {
+  AddressBook.filter((contact) =>
+    contactsCityMap.set(contact.city, SearchByCity(contact.city))
+  );
+  return contactsCityMap;
 }
 // UC9 Displays Contact By State.
-function ViewContactByState(){
-    AddressBook.filter((contact) => contactsStateMap.set(contact.state, SearchByState(contact.state)));
-    return contactsStateMap;
+function ViewContactByState() {
+  AddressBook.filter((contact) =>
+    contactsStateMap.set(contact.state, SearchByState(contact.state))
+  );
+  return contactsStateMap;
 }
 // UC10 Get Contact Count by city.
-function ContactCountByCity(){
-    AddressBook.filter((contact) => countCityMap.set(contact.city, SearchByCity(contact.city).length));
-    return countCityMap;
+function ContactCountByCity() {
+  AddressBook.filter((contact) =>
+    countCityMap.set(contact.city, SearchByCity(contact.city).length)
+  );
+  return countCityMap;
 }
 // UC10 Get Contact Count by state.
-function ContactCountByState(){
-    AddressBook.filter((contact) => countStateMap.set(contact.state, SearchByState(contact.state).length));
-    return countStateMap;
+function ContactCountByState() {
+  AddressBook.filter((contact) =>
+    countStateMap.set(contact.state, SearchByState(contact.state).length)
+  );
+  return countStateMap;
 }
 // UC11 Sort Contacts by name.
-function SortContactsByName(){
-  AddressBook.sort((person1, person2) => (person1.firstName).localeCompare(person2.firstName));
+function SortContactsByName() {
+  AddressBook.sort((person1, person2) =>
+    person1.firstName.localeCompare(person2.firstName)
+  );
   console.log(AddressBook);
+}
+// UC12 Sort Contact by City, State and Zipcode.
+function SortContact(property) {
+  switch (property) {
+    case "city":
+      AddressBook.sort((person1, person2) =>
+        person1.city.localeCompare(person2.city)
+      );
+      console.log(AddressBook);
+      break;
+    case "state":
+      AddressBook.sort((person1, person2) =>
+        person1.state.localeCompare(person2.state)
+      );
+      console.log(AddressBook);
+      break;
+    case "zip":
+      AddressBook.sort((person1, person2) =>
+        person1.zip.localeCompare(person2.zip)
+      );
+      console.log(AddressBook);
+      break;
+    default:
+      console.log("Enter Valid Property.");
+  }
 }
 function Main() {
   console.log("Welcome to address book");
@@ -175,7 +233,7 @@ function Main() {
     "Tirupati",
     "Chittoor",
     "AndhraPradesh",
-    '517 502',
+    "517 502",
     "91 7654321034",
     "prudhvi@gmail.com"
   );
@@ -185,7 +243,7 @@ function Main() {
     "RedFort",
     "Delhi",
     "Delhi",
-    '432 765',
+    "432 765",
     "91 7654321098",
     "bieden@gmail.com"
   );
@@ -195,18 +253,25 @@ function Main() {
     "GhatRoad",
     "Kolkatta",
     "Kolkatta",
-    '517 644',
+    "517 644",
     "91 8976532214",
     "sukhla@gmail.com"
   );
   //printing array
   AddressBook.forEach((contact) => console.log(contact.toString()));
   // UC4 Edit Contact by name.
-  AddressBook.filter(contact => contact.firstName == "Prudhvi" && contact.phoneNumber == "91 7654321034").forEach(contact =>{ contact.address = "RajajiNagar"; contact.city = "Banagalore"; contact.state = "Karnataka"})
-  AddressBook.forEach(contact=>console.log(contact.toString()));
+  AddressBook.filter(
+    (contact) =>
+      contact.firstName == "Prudhvi" && contact.phoneNumber == "91 7654321034"
+  ).forEach((contact) => {
+    contact.address = "RajajiNagar";
+    contact.city = "Banagalore";
+    contact.state = "Karnataka";
+  });
+  AddressBook.forEach((contact) => console.log(contact.toString()));
   // UC5 Deletes the contact from AddressBook Array.
   DeleteContact("Prudhvi", "91 7654321034");
-  AddressBook.forEach(contact=>console.log(contact.toString()));
+  AddressBook.forEach((contact) => console.log(contact.toString()));
   // UC8 Prints Contact by city.
   console.log(SearchByCity("Chittoor"));
   // UC8 Prints Contact by state.
@@ -231,3 +296,7 @@ let countStateMap = new Map();
 Main();
 CountContact();
 SortContactsByName();
+console.log("Contacts Sorted by City");
+SortContact("city");
+console.log("Contacts Sorted by State");
+SortContact("state");
